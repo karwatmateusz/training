@@ -2,3 +2,4 @@
 *.csv
 Scripts
 *.cfg
+!requirements.txt
