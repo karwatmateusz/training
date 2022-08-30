@@ -1,0 +1,36 @@
+{
+   "name":"Jack",
+   "age":30,
+   "contactNumbers":[
+      {
+         "type":"Home",
+         "number":"123 123-123"
+      },
+      {
+         "type":"Office",
+         "number":"321 321-321"
+      }
+   ],
+   "spouse":null,
+   "favoriteSports":[
+      "Football",
+      "Cricket"
+   ],
+   "employees":[
+    {"firstName":"John", "lastName":"Doe"},
+    {"firstName":"Anna", "lastName":"Smith"},
+    {"firstName":"Peter", "lastName":"Jones"}
+],
+    "firstName": "Rack",
+    "lastName": "Jackon",
+    "gender": "man",
+    "address": {
+        "streetAddress": "126",
+        "city": "San Jone",
+        "state": "CA",
+        "postalCode": "394221"
+    },
+    "phoneNumbers": [
+        { "type": "home", "number": "7383627627" }
+    ]
+}

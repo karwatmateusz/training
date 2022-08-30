@@ -3,3 +3,8 @@
 Scripts
 *.cfg
 !requirements.txt
+Lib/
+venv/
+env/
+.idea/
+.DS_Store
