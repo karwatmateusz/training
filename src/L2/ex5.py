@@ -3,4 +3,5 @@ try:
     file.read()
 except FileNotFoundError:
     print("Plik nie istnieje")
-
+# finally:
+#     file.close()

@@ -1,6 +1,10 @@
+from random import sample
+
+
 file = open("ex3.txt", "w")
-for i in range(100):
-    if (i%3==0 ) and (i%6==0):
+numbers_list = sample(range(0, 100), 100)
+for i in numbers_list:
+    if (i % 3 == 0) and (i % 6 == 0):
         file.write(f'{i};\n')
 file.close()
 
