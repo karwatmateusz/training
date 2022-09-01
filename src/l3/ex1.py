@@ -1,4 +1,6 @@
 import random
+
+
 random_list = [random.randint(100,200) for i in range (50)]
 
 """Zadanie a: min i max"""
@@ -9,8 +11,8 @@ print(f"max to {max(random_list)}")
 """Zadanie b: suma wszystkich elementów"""
 print("<<<Zadanie b>>>")
 suma = 0
-for i in range(len(random_list)):
-    suma += random_list[i]
+for i in random_list:
+    suma += i
 print(f"suma to {suma}")
 # print(sum(random_list))
 
