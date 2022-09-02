@@ -1,7 +1,7 @@
 import random
 
 
-random_list = [random.randint(100,200) for i in range (50)]
+random_list = [random.randint(100, 200) for i in range(50)]
 
 """Zadanie a: min i max"""
 print("<<<Zadanie a>>>")
@@ -22,4 +22,4 @@ last_elem = random_list.pop()
 print(f"ostatni element to {last_elem}")
 
 """Zadanie d: wypisz ilosc elementów w liście"""
-print(f'Dlugosc list to {len(random_list)}')
+print(f"Dlugosc list to {len(random_list)}")

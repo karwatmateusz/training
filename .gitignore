@@ -3,3 +3,5 @@
 Scripts
 *.cfg
 !requirements.txt
+Lib/
+.vscode
