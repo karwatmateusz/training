@@ -15,7 +15,7 @@ def not_divide_by_zero_catch(func):
             result = func(a, b)
             return result
         except ZeroDivisionError as e:
-            print(f"{e}, nie mozesz dzielic przez zero")
+            return f"Error: {e}, nie mozesz dzielic przez zero"
 
     return wrapper
 
@@ -27,7 +27,8 @@ def divide(a, b):
     return result
 
 
-x = divide(4, 0) if divide(4, 0) is not None else "Brak wyniku"
+x = divide(4, 0)  # if divide(4, 0) is not None else "Brak wyniku"
+
 # to discuss
 # x = divide(4,0)
 # if x is None:
