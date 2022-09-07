@@ -4,6 +4,7 @@ Scripts
 *.cfg
 !requirements.txt
 Lib/
+.vscode
 venv/
 env/
 .idea/
