@@ -1,7 +1,8 @@
 import csv
 
-header = ['key','value']
-data = [['apple',4], ['banana', 4], ['orange', 2]]
+
+header = ['key', 'value']
+data = [['apple', 4], ['banana', 4], ['orange', 2]]
 
 file = open("ex4.csv", "w", newline="")
 csvwriter = csv.writer(file)
@@ -19,6 +20,6 @@ file.close()
 # print(rows)
 
 dictionary = {
-    row[0]:row[1] for row in rows
+    row[0]: row[1] for row in rows
     }
 print(dictionary)

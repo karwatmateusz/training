@@ -5,3 +5,7 @@ Scripts
 !requirements.txt
 Lib/
 .vscode
+venv/
+env/
+.idea/
+.DS_Store
