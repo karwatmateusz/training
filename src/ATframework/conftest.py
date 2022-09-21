@@ -1,7 +1,7 @@
 import pytest
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
-
+from selenium.webdriver.common.by import By
 
 
 @pytest.fixture(scope="class", autouse=True)
@@ -10,11 +10,13 @@ def driver_setup(request):
     service_object = Service("/Users/MateuszKarwat/webdrivers/chromedriver")
     driver = webdriver.Chrome(service=service_object)
     driver.maximize_window()    
+    # driver.get("https://demo.opencart.com/index.php?route=account/login")
+    # driver.find_element(By.CSS_SELECTOR, '#input-email')
     print("\n Browser up and running")
     request.cls.driver = driver
-    yield
+    yield driver
     print("\n Closing browser")
-    driver.close()
+    # driver.close()
 
 # @pytest.fixture
 # def print_msg():
