@@ -24,13 +24,13 @@ def driver_setup(request):
 #     print("After function")
     
 
-@pytest.fixture(scope="session", autouse=False)
-def print_msg_session():
-    print("\nFixture with session setup")
-    print("Browser set up")
-    yield
-    print("\n \nClearing all data")
-    print("Closing session")
+# @pytest.fixture(scope="session", autouse=False)
+# def print_msg_session():
+#     print("\nFixture with session setup")
+#     print("Browser set up")
+#     yield
+#     print("\n \nClearing all data")
+#     print("Closing session")
 
 
 
@@ -41,4 +41,22 @@ def print_msg_session():
 #     # a = 4
 #     yield a
 #     print("After inside fixture")
-    
+
+
+# def pytest_addoption(parser):     -> dlaczego nie dziala? Wszystkie opcje w jednej funkcji?
+#     parser.addoption(
+#         "--some", action="store", default="type1", help="value to print"
+#         )
+
+# @pytest.fixture
+# def value_to_print2(request):
+#     return request.config.getoption("--some")
+
+# def pytest_addoption(parser):
+#     parser.addoption(
+#         "--value", action="store", default="type1", help="my option: type1 or type2"
+#     )
+
+# @pytest.fixture
+# def value_to_print(request):
+#     return request.config.getoption("--value")

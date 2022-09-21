@@ -13,3 +13,7 @@ def test_fix(inside_fixture):
     a = inside_fixture
     print(f' wartosc w tescie to {a}')
     print("test finished")
+
+@pytest.mark.testoption
+def test_option_print(value_to_print):
+    print(f'\nwartosc z wiersza polecen to {value_to_print}')
