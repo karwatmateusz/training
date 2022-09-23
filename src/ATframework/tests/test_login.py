@@ -9,7 +9,7 @@ class TestLogin(BaseTestClass):
     def test_cos(self):
         login_page = LoginPage(self.driver)
         login_page.go()
-        login_page.email_input("email@com")
-        # login_page.URL = 'google.com'
+        login_page.email_input("testinput@com")
+
         
     
