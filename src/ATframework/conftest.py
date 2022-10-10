@@ -1,3 +1,4 @@
+from datetime import datetime
 import pytest
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
@@ -11,7 +12,7 @@ from webdriver_manager.chrome import ChromeDriverManager
 #     print("\nSetting up browser")
 #     service_object = Service("/Users/MateuszKarwat/webdrivers/chromedriver")
 #     driver = webdriver.Chrome(service=service_object)
-#     driver.maximize_window()    
+#     driver.maximize_window()
 #     print("\n Browser up and running")
 #     request.cls.driver = driver
 #     yield driver
@@ -20,6 +21,8 @@ from webdriver_manager.chrome import ChromeDriverManager
 
 
 """New fixture using webdriver manager"""
+
+
 @pytest.fixture(scope="class", autouse=True)
 def driver_setup(request):
     print("\nSetting up browser")
@@ -32,13 +35,37 @@ def driver_setup(request):
     # driver.close()
 
 
+"""Fixture to take screenshot after test"""
+
+
+@pytest.fixture(scope="function", autouse=True)
+def take_screenshot(request):
+    # yield
+    # if request.node.rep_call.failed:
+    yield
+    # Sprawdzic co zwraca request.node
+    # if request.node == "call" and request.node.rep_call.failed:
+    #     print("screenshot taking")
+    #     driver = request.cls.driver
+    #     file_name = f'{request.node.name}_{datetime.today().strftime("%Y-%m-%d_%H:%M")}.png'.replace(
+    #         "/", "_"
+    #     ).replace(
+    #         "::", "__"
+    #     )
+    #     print(f"file name to {file_name}")
+    #     driver.save_screenshot(file_name)
+    #     print("screenshot saved")
+    # else:
+    print("test passed")
+
+
 # @pytest.fixture
 # def print_msg():
 #     print("I am a fixture running")
 #     a = 2
 #     yield a
 #     print("After function")
-    
+
 
 # @pytest.fixture(scope="session", autouse=False)
 # def print_msg_session():
@@ -47,7 +74,6 @@ def driver_setup(request):
 #     yield
 #     print("\n \nClearing all data")
 #     print("Closing session")
-
 
 
 # @pytest.fixture
