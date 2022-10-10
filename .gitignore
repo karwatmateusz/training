@@ -10,3 +10,6 @@ env/
 .idea/
 .DS_Store
 .vscode
+__pycache__
+allure_result_folder
+*.png
