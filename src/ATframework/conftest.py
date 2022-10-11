@@ -1,5 +1,6 @@
 from datetime import datetime
 import pytest
+import allure
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
@@ -56,6 +57,10 @@ def take_screenshot(request):
     #     driver.save_screenshot(file_name)
     #     print("screenshot saved")
     # else:
+    driver = request.cls.driver
+    file_name = "screen.png"
+    driver.save_screenshot(file_name)
+    allure.attach.file(file_name, attachment_type=allure.attachment_type.PNG)
     print("test passed")
 
 
