@@ -39,29 +39,33 @@ def driver_setup(request):
 """Fixture to take screenshot after test"""
 
 
-@pytest.fixture(scope="function", autouse=True)
-def take_screenshot(request):
+@pytest.hookimpl(tryfirst=True, hookwrapper=True)
+# @pytest.fixture(scope="function", autouse=True)
+# def take_screenshot(call):
+def pytest_runtest_makereport(item, call):
     # yield
     # if request.node.rep_call.failed:
-    yield
+    outcome = yield
+    rep = outcome.get_result()
     # Sprawdzic co zwraca request.node
-    # if request.node == "call" and request.node.rep_call.failed:
-    #     print("screenshot taking")
-    #     driver = request.cls.driver
-    #     file_name = f'{request.node.name}_{datetime.today().strftime("%Y-%m-%d_%H:%M")}.png'.replace(
-    #         "/", "_"
-    #     ).replace(
-    #         "::", "__"
-    #     )
-    #     print(f"file name to {file_name}")
-    #     driver.save_screenshot(file_name)
-    #     print("screenshot saved")
-    # else:
-    driver = request.cls.driver
-    file_name = "screen.png"
-    driver.save_screenshot(file_name)
-    allure.attach.file(file_name, attachment_type=allure.attachment_type.PNG)
-    print("test passed")
+    print(f"rep to {rep.when}")
+    if rep.when == "call" and rep.passed:
+        print("screenshot taking")
+        # driver = request.cls.driver
+        # file_name = f'{request.node.name}_{datetime.today().strftime("%Y-%m-%d_%H:%M")}.png'.replace(
+        #     "/", "_"
+        # ).replace(
+        #     "::", "__"
+        # )
+        # print(f"file name to {file_name}")
+        # driver.save_screenshot(file_name)
+        print("screenshot saved")
+    else:
+        # driver = request.cls.driver
+        # file_name = "screen.png"
+        # driver.save_screenshot(file_name)
+        # allure.attach.file(file_name, attachment_type=allure.attachment_type.PNG)
+        print("test passed")
 
 
 # @pytest.fixture
