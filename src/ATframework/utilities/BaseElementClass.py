@@ -10,15 +10,12 @@ class BaseElement():
         self.element = self.verify_element(self.locator)
 
     def insert_text(self, text):
-        # field = self.verify_element(self.locator)
         self.element.send_keys(text)
+        return self
 
     def click_field(self):
-        # field = self.verify_element(self.locator)
         self.element.click()
-
-    """TO DO: create class with support for checking elements(+wait), check BasePageClass"""
+        return self
+        
     def verify_element(self, locator):
-        return WebDriverWait(self.driver, timeout=5).until(EC.visibility_of_element_located((locator[0], locator[1])))
-        # element = self.driver.find_element(locator[0], locator[1])
-        # return element
+        return WebDriverWait(self.driver, timeout=5).until(EC.visibility_of_element_located((locator.method, locator.location)))
