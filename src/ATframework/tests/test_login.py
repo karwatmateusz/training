@@ -2,13 +2,24 @@ import pytest
 import allure
 from src.ATframework.utilities.BaseTestClass import BaseTestClass
 from src.ATframework.pages.LoginPage import LoginPage
+from utilities.logger import Logger
+import logging
 
 
 class TestLogin(BaseTestClass):
+
+    log = Logger(logging.DEBUG)
+
     @pytest.mark.auto
     # @allure.flaky
     @allure.title("This test has a custom title")
     def test_cos(self):
+        self.log.debug("debug message")
+        print("elo")
+        self.log.info("info message")
+        print("some action")
+        x = 1
+        self.log.error(f"error happened {x}")
         assert True
         return
         login_page = LoginPage(self.driver)

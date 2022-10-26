@@ -33,7 +33,7 @@ def driver_setup(request):
     print("\nBrowser up and running")
     yield
     print("\nTesting finished \nClosing browser")
-    # driver.close()
+    driver.quit()
 
 
 """Fixture to take screenshot after test"""
@@ -57,7 +57,7 @@ def pytest_runtest_makereport(item, call):
         # ).replace(
         #     "::", "__"
         # )
-        # print(f"file name to {file_name}")
+        # # print(f"file name to {file_name}")
         # driver.save_screenshot(file_name)
         print("screenshot saved")
     else:
