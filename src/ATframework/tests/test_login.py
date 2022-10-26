@@ -8,18 +8,20 @@ import logging
 
 class TestLogin(BaseTestClass):
 
-    log = Logger(logging.DEBUG)
+    URL = "https://google.com/"
 
     @pytest.mark.auto
     # @allure.flaky
     @allure.title("This test has a custom title")
-    def test_cos(self):
+    def test_cos(self, driver_setup):
         self.log.debug("debug message")
         print("elo")
         self.log.info("info message")
         print("some action")
         x = 1
         self.log.error(f"error happened {x}")
+        driver_setup.get(self.URL)
+        self.log.info("moved to URL")
         assert True
         return
         login_page = LoginPage(self.driver)
@@ -29,3 +31,8 @@ class TestLogin(BaseTestClass):
         login_page.login_button_click()
         assert login_page.element_is_visible, "Log in failed"
         # assert 'language' in login_page.get_url()
+
+    @pytest.mark.auto
+    def test_dwa(self):
+        self.log.info("second test")
+        assert True

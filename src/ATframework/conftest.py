@@ -33,7 +33,7 @@ def driver_setup(request):
     print("\nBrowser up and running")
     yield
     print("\nTesting finished \nClosing browser")
-    driver.quit()
+    # driver.quit()
 
 
 """Fixture to take screenshot after test"""
