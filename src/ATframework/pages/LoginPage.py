@@ -7,13 +7,13 @@ from utilities.locator import Locator
 
 class LoginPage(BasePageClass):
 
-    _URL = "http://automationpractice.com/index.php?controller=my-account"
+    _URL = "https://the-internet.herokuapp.com/login"
     # email_locator = (By.CSS_SELECTOR, "#email")
     # password_locator = (By.CSS_SELECTOR, "#passwd")
     # login_locator = (By.CSS_SELECTOR, "#SubmitLogin")
-    email_locator = Locator("#email")
-    password_locator = Locator("#passwd")
-    login_locator = Locator("#SubmitLogin")
+    email_locator = Locator("#username")
+    password_locator = Locator("#password")
+    login_locator = Locator("#login > button")
 
     def email_input(self, email):
         # email_field = self.verify_element(self.email_locator)

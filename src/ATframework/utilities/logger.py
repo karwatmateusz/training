@@ -11,7 +11,7 @@ def Logger(logLevel):
     logger.setLevel(logging.DEBUG)
 
     fileHandler = logging.FileHandler(
-        filename=f"logs_{loggerName}_{datetime.today().strftime('%m-%d_%H-%M')}.log",
+        filename=f"logs__{datetime.today().strftime('%m-%d_%H-%M')}.log",
         mode="w",
     )
 
