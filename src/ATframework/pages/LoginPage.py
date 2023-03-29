@@ -8,30 +8,29 @@ from utilities.locator import Locator
 class LoginPage(BasePageClass):
 
     _URL = "https://the-internet.herokuapp.com/login"
-    # email_locator = (By.CSS_SELECTOR, "#email")
-    # password_locator = (By.CSS_SELECTOR, "#passwd")
-    # login_locator = (By.CSS_SELECTOR, "#SubmitLogin")
-    email_locator = Locator("#username")
+    username_locator = Locator("#username")
     password_locator = Locator("#password")
     login_locator = Locator("#login > button")
 
-    def email_input(self, email):
-        # email_field = self.verify_element(self.email_locator)
-        # email_field.send_keys(email)
-        email_field = BaseElement(self.driver, self.email_locator)
-        email_field.insert_text(email)
+    def username_input(self, username):
+        username_field = BaseElement(self.driver, self.username_locator)
+        username_field.insert_text(username)
 
     def password_input(self, password):
-        # password_field = self.verify_element(self.password_locator)
-        # password_field.send_keys(password)
         password_field = BaseElement(self.driver, self.password_locator)
         password_field.insert_text(password)
 
     def login_button_click(self):
-        # login_button = self.verify_element(self.login_locator)
-        # login_button.click()
         login_button = BaseElement(self.driver, self.login_locator)
         login_button.click_field()
 
-    def get_url(self):
+    def login_to_system(self, username, password):
+        self.username_input(username)
+        self.password_input(password)
+        self.login_button_click()
+
+    def is_user_logged(self):
+        return "secure" in self.get_page_url()
+
+    def get_page_url(self):
         return self.driver.current_url

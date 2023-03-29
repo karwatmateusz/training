@@ -6,8 +6,3 @@ from selenium.webdriver.common.by import By
 class Locator:
     location: str
     method: str = By.CSS_SELECTOR
-
-
-# from collections import namedtuple
-
-# Locator = namedtuple("Locator", ["by", "value"])

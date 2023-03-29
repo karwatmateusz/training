@@ -4,10 +4,9 @@ from datetime import datetime
 
 
 def Logger(logLevel):
-    # Gets the name of the class / method from where this method is called
+
     loggerName = inspect.stack()[1][3]
     logger = logging.getLogger(loggerName)
-    # Log all messages
     logger.setLevel(logging.DEBUG)
 
     fileHandler = logging.FileHandler(

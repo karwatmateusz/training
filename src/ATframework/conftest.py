@@ -7,22 +7,6 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver import Chrome
 from webdriver_manager.chrome import ChromeDriverManager
 
-"""OLD fixture with webdriver service+path and driver in request variables"""
-# @pytest.fixture(scope="class", autouse=True)
-# def driver_setup(request):
-#     print("\nSetting up browser")
-#     service_object = Service("/Users/MateuszKarwat/webdrivers/chromedriver")
-#     driver = webdriver.Chrome(service=service_object)
-#     driver.maximize_window()
-#     print("\n Browser up and running")
-#     request.cls.driver = driver
-#     yield driver
-#     print("\n Closing browser")
-#     # driver.close()
-
-
-"""New fixture using webdriver manager"""
-
 
 @pytest.fixture(scope="class", autouse=True)
 def driver_setup(request):
@@ -33,81 +17,53 @@ def driver_setup(request):
     print("\nBrowser up and running")
     yield
     print("\nTesting finished \nClosing browser")
-    driver.quit()
-
-
-"""Fixture to take screenshot after test"""
+    driver.close()
 
 
 @pytest.hookimpl(tryfirst=True, hookwrapper=True)
-# @pytest.fixture(scope="function", autouse=True)
-# def take_screenshot(call):
 def pytest_runtest_makereport(item, call):
-    # yield
-    # if request.node.rep_call.failed:
     outcome = yield
     rep = outcome.get_result()
-    # Sprawdzic co zwraca request.node
-    print(f"rep to {rep.when}")
-    if rep.when == "call" and rep.passed:
-        print("screenshot taking")
-        # driver = request.cls.driver
-        # file_name = f'{request.node.name}_{datetime.today().strftime("%Y-%m-%d_%H:%M")}.png'.replace(
-        #     "/", "_"
-        # ).replace(
-        #     "::", "__"
-        # )
-        # # print(f"file name to {file_name}")
-        # driver.save_screenshot(file_name)
-        print("screenshot saved")
-    else:
-        # driver = request.cls.driver
-        # file_name = "screen.png"
-        # driver.save_screenshot(file_name)
-        # allure.attach.file(file_name, attachment_type=allure.attachment_type.PNG)
-        print("test passed")
+    print(f"rep to {rep}")
+    print(setattr(item, "rep_" + rep.when, rep))
 
 
-# @pytest.fixture
-# def print_msg():
-#     print("I am a fixture running")
-#     a = 2
-#     yield a
-#     print("After function")
+@pytest.fixture(scope="function", autouse=True)
+def attach_screenshot_on_fail(request):
+    yield
+    if request.node.rep_setup.failed:
+        print("setting up env failed")
+    elif request.node.rep_call.failed:
+        print(f"Test execution for {request.node.name} failed, taking a screenshot")
+        driver = request.cls.driver
+        file_name = f'/screenshots/{request.node.name}_{datetime.today().strftime("%Y-%m-%d_%H-%M")}.png'
+        print(f"file name to {file_name}")
+        take_screenshot(driver, file_name)
+        attach_screenshot_to_report(file_name)
 
 
-# @pytest.fixture(scope="session", autouse=False)
-# def print_msg_session():
-#     print("\nFixture with session setup")
-#     print("Browser set up")
-#     yield
-#     print("\n \nClearing all data")
-#     print("Closing session")
+def take_screenshot(driver, file_name):
+    driver.save_screenshot(file_name)
+    print("Screenshot saved")
 
 
-# @pytest.fixture
-# def inside_fixture(request):
-#     a = request.getfixturevalue("print_msg")
-#     print("Inside fixture")
-#     # a = 4
-#     yield a
-#     print("After inside fixture")
+def attach_screenshot_to_report(file_name):
+    allure.attach.file(file_name, attachment_type=allure.attachment_type.PNG)
+    print("Screenshot attached to the report")
 
 
-# def pytest_addoption(parser):     -> dlaczego nie dziala? Wszystkie opcje w jednej funkcji?
-#     parser.addoption(
-#         "--some", action="store", default="type1", help="value to print"
-#         )
+def pytest_addoption(parser):
+    parser.addoption(
+        "--browser",
+        action="store",
+        default="chrome",
+        help="Currently available option: chrome",
+    )
 
-# @pytest.fixture
-# def value_to_print2(request):
-#     return request.config.getoption("--some")
 
-# def pytest_addoption(parser):
-#     parser.addoption(
-#         "--value", action="store", default="type1", help="my option: type1 or type2"
-#     )
+@pytest.fixture(scope="class")
+def browser_selected(request):
+    return request.config.getoption("--browser")
 
-# @pytest.fixture
-# def value_to_print(request):
-#     return request.config.getoption("--value")
+
+# TO DO: add fixture to run headlessly or not
